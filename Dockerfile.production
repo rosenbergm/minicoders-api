@@ -1,0 +1,10 @@
+FROM node:10.6.0-alpine
+
+WORKDIR /usr/app
+
+COPY package.json .
+RUN npm install --production --quiet
+
+COPY . .
+
+RUN NODE_ENV=production npm run build

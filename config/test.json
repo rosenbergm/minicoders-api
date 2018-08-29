@@ -1,0 +1,12 @@
+{
+  "logging": {
+    "level": "fatal"
+  },
+  "port": 7301,
+  "db": {
+      "dialect": "sqlite",
+      "storage": "test-db.sqlite",
+      "databaseName": "test-db.sqlite",
+      "modelPath": "/../models/*.model.ts"
+  }
+}

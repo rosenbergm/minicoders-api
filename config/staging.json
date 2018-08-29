@@ -1,0 +1,11 @@
+{
+  "db": {
+      "database": "websense",
+      "username": "postgres",
+      "password": "devpass",
+      "host": "postgres",
+      "dialect": "postgres",
+      "port": 5432,
+      "modelPath": "/../models/*.model.js"
+  }
+}

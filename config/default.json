@@ -1,0 +1,28 @@
+{
+  "host": "0.0.0.0",
+  "port": 7300,
+  "logging": {
+    "level": "debug"
+  },
+  "origin": "http://localhost:3000",
+  "swagger": {
+    "enabled": true,
+    "config_path": "./definitions/swagger.json"
+  },
+  "db": {
+      "database": "websense",
+      "username": "postgres",
+      "password": "devpass",
+      "host": "localhost",
+      "dialect": "postgres",
+      "port": 5436,
+      "modelPath": "/../models/*.model.ts"
+  },
+  "redis": {
+    "host": "localhost",
+    "port": 6379
+  },
+  "appcenter_push_token": "aa1a124fa04f708bc2e0dd4e6b60c5e7650a4e8d",
+  "security": true,
+  "jwt_secret": "Something random"
+}

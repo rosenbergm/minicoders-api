@@ -1,0 +1,31 @@
+{
+  "development": {
+    "username": "postgres",
+    "password": "devpass",
+    "database": "websense",
+    "host": "localhost",
+    "port": 5436,
+    "dialect": "postgres"
+  },
+  "staging": {
+    "username": "postgres",
+    "password": "devpass",
+    "database": "websense",
+    "host": "postgres",
+    "dialect": "postgres",
+    "port": 5436
+  },
+  "production": {
+    "username": "tvoslar",
+    "password": "websensewebsense",
+    "database": "websense",
+    "host": "",
+    "dialect": "sqlite"
+  },
+  "test": {
+    "dialect": "sqlite",
+    "storage": "test-db.sqlite",
+    "databaseName": "test-db.sqlite",
+    "modelPath": "/../models/*.model.ts"
+  }
+}

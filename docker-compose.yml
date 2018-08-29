@@ -1,0 +1,44 @@
+version: '3'
+
+services:
+  # web:
+  #   build: .
+  #   command: npm run dev
+  #   volumes:
+  #     - .:/usr/app/
+  #     - /usr/app/node_modules
+  #   ports:
+  #     - "7300:7300"
+  #   depends_on:
+  #     - postgres
+  #     - redis
+  redis:
+    image: 'bitnami/redis:latest'
+    environment:
+      # ALLOW_EMPTY_PASSWORD is recommended only for development.
+      - ALLOW_EMPTY_PASSWORD=yes
+    labels:
+      kompose.service.type: nodeport
+    ports:
+      - '6379:6379'
+    networks:
+      - mybridge
+    volumes:
+      - 'redis_data:/bitnami/redis'
+  postgres:
+    image: 'postgres:9.5'
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: devpass
+    ports:
+      - '5436:5432'
+    networks:
+      - mybridge
+
+volumes:
+  redis_data:
+    driver: local
+
+networks:
+  mybridge:
+    driver: bridge

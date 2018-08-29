@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "lib": [
+      "dom",
+      "es2017",
+      "esnext.asynciterable"
+    ],
+    "target": "es2017",
+    "allowJs": false,
+    "sourceMap": true,
+    "outDir": "build",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true
+  },
+  "include": [
+    "src"
+  ],
+  "exclude": [
+    "node_modules",
+    "docs",
+    "coverage",
+    ".nyc_output",
+    "migrations"
+  ]
+}

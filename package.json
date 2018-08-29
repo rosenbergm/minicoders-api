@@ -1,0 +1,87 @@
+{
+  "name": "websense-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "NODE_ENV=test mocha --opts test/mocha.opts",
+    "start": "npm run build && node $NODE_DEBUG_OPTION ./build/index.js ",
+    "dev": "nodemon --exec ts-node src/index.ts | bunyan -o short",
+    "coverage": "nyc npm run test",
+    "build": "rm -rf ./build && tsc && cp -r ./config ./build/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@dev1.webcook.cz:own-projects/websense-api.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "apollo-server": "^2.0.0",
+    "apollo-server-express": "^2.0.4",
+    "bcrypt-nodejs": "0.0.3",
+    "bunyan": "^1.8.12",
+    "bunyan-middleware": "^0.8.0",
+    "config": "^2.0.1",
+    "express": "^4.16.3",
+    "express-jwt": "^5.3.1",
+    "graphql": "^0.13.2",
+    "pg": "^7.4.3",
+    "pgtools": "^0.3.0",
+    "redis": "^2.8.0",
+    "reflect-metadata": "^0.1.12",
+    "sequelize": "^4.38.0",
+    "sequelize-cli": "^4.0.0",
+    "sequelize-typescript": "^0.6.6",
+    "slug": "^0.9.1",
+    "type-graphql": "^0.13.0",
+    "typescript": "^3.0.1",
+    "typescript-ioc": "^1.2.4"
+  },
+  "devDependencies": {
+    "@types/graphql": "^0.13.4",
+    "@types/mocha": "^5.2.5",
+    "chai": "^4.1.2",
+    "child-process-promise": "^2.2.1",
+    "graphql-request": "^1.8.2",
+    "jsdom": "^11.12.0",
+    "jsdom-global": "^3.0.2",
+    "mocha": "^5.2.0",
+    "nodemon": "^1.18.3",
+    "nyc": "^12.0.2",
+    "sqlite3": "^4.0.2",
+    "ts-node": "^7.0.0",
+    "tslint": "^5.11.0",
+    "tslint-eslint-rules": "^5.3.1"
+  },
+  "nyc": {
+    "statements": 0,
+    "branches": 0,
+    "functions": 0,
+    "lines": 0,
+    "exclude": [
+      "node_modules",
+      "config",
+      "coverage",
+      "test",
+      "docs",
+      "i18n",
+      "build",
+      "**/*.d.ts",
+      "migrations"
+    ],
+    "extension": [
+      "*.js",
+      ".ts"
+    ],
+    "reporter": [
+      "lcov",
+      "text-summary"
+    ],
+    "cache": true,
+    "all": true,
+    "check-coverage": true,
+    "report-dir": "./coverage"
+  }
+}
