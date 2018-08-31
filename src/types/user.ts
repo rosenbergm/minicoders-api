@@ -17,8 +17,4 @@ export class UserRegisterInput implements Partial<User> {
   name: string
   @Field({ nullable: false })
   password: string
-  @Field({ nullable: false })
-  title: string
-  @Field({ nullable: false })
-  domain: string
 }

@@ -3,14 +3,12 @@ import 'reflect-metadata'
 import { buildSchema } from 'type-graphql'
 import * as configG from 'config'
 import * as jwt from 'express-jwt'
-import ProjectResolver from './resolvers/project.resolver'
-import PageResolver from './resolvers/page.resolver'
 import UserResolver from './resolvers/user.resolver'
+import TaskResolver from './resolvers/task.resolver'
+import UserTaskResolver from './resolvers/userTask.resolver'
 import * as express from 'express'
 import { Container } from 'typescript-ioc'
 import Database from './services/database'
-import TaskResolver from './resolvers/task.resolver'
-import UserTaskResolver from './resolvers/userTask.resolver'
 
 interface IConfig {
   port: number,
@@ -25,7 +23,7 @@ const customAuthChecker: any =
 
 let server, apolloServer
 buildSchema({
-  resolvers: [ProjectResolver, PageResolver, UserResolver, TaskResolver, UserTaskResolver],
+  resolvers: [ UserResolver, TaskResolver, UserTaskResolver],
   authChecker: customAuthChecker
 }).then((schema) => {
   apolloServer = new ApolloServer({
@@ -34,14 +32,8 @@ buildSchema({
       apiKey: 'service:websense:B2NAq_2Wmoidx9FQX65sDQ'
     },
     context: async ({ args, req, res }) => {
-      const db = Container.get(Database)
-      const domain = req.hostname
-console.log(domain)
-      const project = await db.models.Project.findOne({ where: { domain } })
-
       return {
-        user: req.user,
-        project
+        user: req.user
       }
     }
    })

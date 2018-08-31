@@ -1,4 +1,4 @@
-import { Resolver, Mutation, Arg, Query, Authorized, Ctx } from 'type-graphql'
+import { Resolver, Mutation, Arg, Query, Authorized } from 'type-graphql'
 import { ApolloError, AuthenticationError } from 'apollo-server-express'
 import User from '../models/user.model'
 import { Inject } from 'typescript-ioc'
@@ -37,7 +37,6 @@ export default class UserResolver {
   @Mutation(returns => String)
   async register (@Arg('data') userRegisterInput: UserRegisterInput): Promise<string> {
     await this.checkUserExists(userRegisterInput.email)
-    await this.checkProjectExists(userRegisterInput.domain)
 
     const user = {
       email: userRegisterInput.email,
@@ -49,12 +48,6 @@ export default class UserResolver {
 
     const newUser = await this.database.models.User.create(user)
 
-    const project = {
-      title: userRegisterInput.title,
-      domain: userRegisterInput.domain
-    }
-    await this.database.models.Project.create(project)
-
     return this.getUserToken(newUser)
   }
 
@@ -62,13 +55,6 @@ export default class UserResolver {
     const user = await this.database.models.User.findOne({ where: { email } })
     if (user) {
       throw new ApolloError('User with this email address already exists.', 'USER_ALREADY_EXISTS')
-    }
-  }
-
-  private async checkProjectExists (domain: string) {
-    const project = await this.database.models.Project.findOne({ where: { domain } })
-    if (project) {
-      throw new ApolloError('This domain is already registered.', 'DOMAIN_ALREADY_EXISTS')
     }
   }
 
