@@ -3,8 +3,10 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.bulkInsert('Task', [{
-      problem: 'Vypis cislo 1 do konzole.',
-      solution: 'console.log(1);',
+      title: 'Proměnná',
+      problem: 'Definuj proměnnou x a inicializuj jí číslem 10.',
+      solution: 'let x = 10',
+      test: 'x === 10',
       createdAt: new Date(),
       updatedAt: new Date(),
     }], {});

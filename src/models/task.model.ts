@@ -12,9 +12,17 @@ export default class Task extends Model<Task> {
 
   @Field()
   @Column
+  title: string
+
+  @Field()
+  @Column
   problem: string
 
   @Field()
   @Column
   solution: string
+
+  @Field()
+  @Column
+  test: string
 }

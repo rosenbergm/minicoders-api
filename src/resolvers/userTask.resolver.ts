@@ -1,4 +1,4 @@
-import { Resolver, Args, Query, FieldResolver, Root } from 'type-graphql'
+import { Resolver, Query, FieldResolver, Root } from 'type-graphql'
 import { Inject } from 'typescript-ioc'
 import Database from '../services/database'
 import UserTask from '../models/userTask.model'
