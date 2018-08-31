@@ -10,7 +10,7 @@
     "config_path": "./definitions/swagger.json"
   },
   "db": {
-      "database": "websense",
+      "database": "minicoders",
       "username": "postgres",
       "password": "devpass",
       "host": "localhost",

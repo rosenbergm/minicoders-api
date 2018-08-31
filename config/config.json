@@ -2,7 +2,7 @@
   "development": {
     "username": "postgres",
     "password": "devpass",
-    "database": "websense",
+    "database": "minicoders",
     "host": "localhost",
     "port": 5436,
     "dialect": "postgres"
@@ -10,15 +10,15 @@
   "staging": {
     "username": "postgres",
     "password": "devpass",
-    "database": "websense",
+    "database": "minicoders",
     "host": "postgres",
     "dialect": "postgres",
     "port": 5436
   },
   "production": {
     "username": "tvoslar",
-    "password": "websensewebsense",
-    "database": "websense",
+    "password": "minicodersminicoders",
+    "database": "minicoders",
     "host": "",
     "dialect": "sqlite"
   },
