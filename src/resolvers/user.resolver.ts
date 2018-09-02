@@ -1,4 +1,4 @@
-import { Resolver, Mutation, Arg, Query, Authorized } from 'type-graphql'
+import { Resolver, Mutation, Arg, Query, Authorized, Ctx } from 'type-graphql'
 import { ApolloError, AuthenticationError } from 'apollo-server-express'
 import User from '../models/user.model'
 import { Inject } from 'typescript-ioc'
@@ -6,7 +6,7 @@ import Database from '../services/database'
 import * as config from 'config'
 import * as jwt from 'jsonwebtoken'
 import * as bCrypt from 'bcrypt-nodejs'
-import { LoginInput, UserRegisterInput } from '../types/user'
+import { LoginInput, UserRegisterInput, LoginResponse } from '../types/user'
 
 @Resolver(User)
 export default class UserResolver {
@@ -18,8 +18,14 @@ export default class UserResolver {
     return await this.database.models.User.findAll()
   }
 
-  @Mutation(returns => String)
-  async login (@Arg('data') credentials: LoginInput): Promise<string> {
+  @Query(returns => User)
+  @Authorized()
+  async user (@Ctx() ctx): Promise<User> {
+    return await this.database.models.User.findById(ctx.user.id)
+  }
+
+  @Mutation(returns => LoginResponse)
+  async login (@Arg('data') credentials: LoginInput): Promise<LoginResponse> {
     const user = await this.database.models.User.findOne({ where: { email: credentials.email } })
 
     if (!user) {
@@ -31,11 +37,11 @@ export default class UserResolver {
       throw new AuthenticationError('Invalid user password.')
     }
 
-    return this.getUserToken(user)
+    return { token: this.getUserToken(user), user }
   }
 
-  @Mutation(returns => String)
-  async register (@Arg('data') userRegisterInput: UserRegisterInput): Promise<string> {
+  @Mutation(returns => LoginResponse)
+  async register (@Arg('data') userRegisterInput: UserRegisterInput): Promise<LoginResponse> {
     await this.checkUserExists(userRegisterInput.email)
 
     const user = {
@@ -48,7 +54,7 @@ export default class UserResolver {
 
     const newUser = await this.database.models.User.create(user)
 
-    return this.getUserToken(newUser)
+    return { token: this.getUserToken(newUser), user: newUser }
   }
 
   private async checkUserExists (email: string) {

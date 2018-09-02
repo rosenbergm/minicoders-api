@@ -1,4 +1,4 @@
-import { Resolver, Mutation, Arg, InputType, Field } from 'type-graphql'
+import { InputType, Field, ObjectType } from 'type-graphql'
 import User from '../models/user.model'
 
 @InputType({ description: 'User credentials' })
@@ -17,4 +17,12 @@ export class UserRegisterInput implements Partial<User> {
   name: string
   @Field({ nullable: false })
   password: string
+}
+
+@ObjectType()
+export class LoginResponse {
+  @Field()
+  token: string
+  @Field()
+  user: User
 }
