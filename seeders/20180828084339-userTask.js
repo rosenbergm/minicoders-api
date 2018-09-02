@@ -5,6 +5,7 @@ module.exports = {
     await queryInterface.bulkInsert('UserTask', [{
       progress: 'console.lo',
       taskId: 1,
+      userId: 1,
       createdAt: new Date(),
       updatedAt: new Date(),
     }], {});
