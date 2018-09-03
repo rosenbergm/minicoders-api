@@ -1,5 +1,6 @@
 import { ObjectType, Field } from 'type-graphql'
-import { Table, Column, Model } from 'sequelize-typescript'
+import { Table, Column, Model, HasMany } from 'sequelize-typescript'
+import UserTask from './userTask.model'
 
 @Table({
   timestamps: true,
@@ -25,4 +26,7 @@ export default class Task extends Model<Task> {
   @Field()
   @Column
   test: string
+
+  @HasMany(() => UserTask)
+  userTasks: UserTask
 }
