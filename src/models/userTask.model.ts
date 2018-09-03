@@ -1,5 +1,5 @@
 import { ObjectType, Field } from 'type-graphql'
-import { Table, Column, Model, ForeignKey, BelongsTo } from 'sequelize-typescript'
+import { Table, Column, Model, ForeignKey, BelongsTo, Default } from 'sequelize-typescript'
 import Task from './task.model'
 import User from './user.model'
 
@@ -15,6 +15,11 @@ export default class UserTask extends Model<UserTask> {
   @Field()
   @Column
   progress: string
+
+  @Field()
+  @Default(false)
+  @Column
+  finished: boolean
 
   @Field()
   @ForeignKey(() => Task)

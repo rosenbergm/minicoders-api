@@ -29,4 +29,12 @@ export default class Task extends Model<Task> {
 
   @HasMany(() => UserTask)
   userTasks: UserTask
+
+  @Field()
+  @Column
+  level: number
+
+  @Field()
+  @Column
+  points: number
 }

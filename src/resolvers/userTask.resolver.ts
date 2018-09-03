@@ -3,21 +3,26 @@ import { Inject } from 'typescript-ioc'
 import Database from '../services/database'
 import UserTask from '../models/userTask.model'
 import Task from '../models/task.model'
-import { UserTaskInput, UserTaskResponse } from '../types/task'
+import { UserTaskInput, UserTaskResponse, UserTasksFilterInput } from '../types/task'
 
 @Resolver(UserTask)
 export default class UserTaskResolver {
   @Inject private database: Database
 
   @Query(returns => [UserTaskResponse])
-  async userTasks (@Ctx() ctx) {
+  async userTasks (@Arg('data') data: UserTasksFilterInput, @Ctx() ctx) {
+    // TODO: refactor
+    // OPTIMIZE: Should not use map function, but directly return object
     const tasks = await this.database.models.Task.findAll({
-      attributes: [ 'id', 'title', 'problem', 'test', 'solution' ],
+      attributes: [ 'id', 'title', 'problem', 'test', 'solution', 'level', 'points' ],
       include: [ {
         model: this.database.models.UserTask,
         where: { userId: ctx.user.id },
         required: false
-      } ]
+      } ],
+      where: {
+        level: data.level
+      }
     })
 
     return tasks.map(task => {
@@ -27,7 +32,10 @@ export default class UserTaskResolver {
         solution: task.solution,
         test: task.test,
         taskId: task.id,
+        level: task.level,
+        points: task.points,
         progress: task.userTasks.length > 0 ? task.userTasks[0].progress : undefined,
+        finished: task.userTasks.length > 0 ? task.userTasks[0].finished : undefined,
         userTaskId: task.userTasks.length > 0 ? task.userTasks[0].id : undefined
       }
     })
@@ -46,12 +54,13 @@ export default class UserTaskResolver {
     const userTask = await this.database.models.UserTask.findById(userTaskInput.userTaskId)
 
     if (userTask) {
-      userTask.update({ progress: userTaskInput.progress })
+      userTask.update({ progress: userTaskInput.progress, finished: userTaskInput.finished })
     } else {
       await this.database.models.UserTask.create({
         progress: userTaskInput.progress,
         taskId: userTaskInput.taskId,
-        userId: ctx.user.id
+        userId: ctx.user.id,
+        finished: userTaskInput.finished
       })
     }
 

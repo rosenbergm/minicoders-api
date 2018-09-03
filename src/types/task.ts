@@ -1,6 +1,12 @@
 import { InputType, Field, ObjectType } from 'type-graphql'
 
 @InputType()
+export class UserTasksFilterInput {
+  @Field()
+  level: number
+}
+
+@InputType()
 export class UserTaskInput {
   @Field()
   taskId: number
@@ -10,6 +16,9 @@ export class UserTaskInput {
 
   @Field({ nullable: true })
   userTaskId: number
+
+  @Field({ nullable: true })
+  finished: boolean
 }
 
 @ObjectType()
@@ -34,4 +43,13 @@ export class UserTaskResponse {
 
   @Field()
   test: string
+
+  @Field()
+  level: number
+
+  @Field()
+  points: number
+
+  @Field({ nullable: true })
+  finished: boolean
 }
