@@ -29,7 +29,7 @@ buildSchema({
   apolloServer = new ApolloServer({
     schema,
     engine: {
-      apiKey: 'service:websense:B2NAq_2Wmoidx9FQX65sDQ'
+      apiKey: 'service:minicoders:QAT3KrNUcjOAx8ss3jzByg'
     },
     context: async ({ args, req, res }) => {
       return {
