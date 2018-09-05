@@ -2,6 +2,7 @@ import { ObjectType, Field } from 'type-graphql'
 import { Table, Column, Model, ForeignKey, BelongsTo, Default } from 'sequelize-typescript'
 import Task from './task.model'
 import User from './user.model'
+import * as Sequelize from 'sequelize'
 
 @Table({
   timestamps: true,
@@ -13,7 +14,7 @@ export default class UserTask extends Model<UserTask> {
   id: number
 
   @Field()
-  @Column
+  @Column(Sequelize.TEXT)
   progress: string
 
   @Field()
