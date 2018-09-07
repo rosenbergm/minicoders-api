@@ -51,5 +51,8 @@ export class UserTaskResponse {
   points: number
 
   @Field({ nullable: true })
+  canvas: boolean
+
+  @Field({ nullable: true })
   finished: boolean
 }

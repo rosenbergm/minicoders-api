@@ -7,7 +7,8 @@ const tasks = [
     solution: '',
     test: 'consoleStack.includes("Hello world")',
     level: 1,
-    points: 5
+    points: 5,
+    canvas: true
   },
   {
     title: 'Číslo',
