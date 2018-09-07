@@ -32,10 +32,9 @@ export default class UserResolver {
       name: user.name,
       password: '',
     }
-    updatedUser.password = bCrypt.hashSync(user.password, ctx.user.salt.genSaltSync(), undefined)
-    if (user) {
-      return await dbUser.update(updatedUser)
-    }
+    updatedUser.password = bCrypt.hashSync(user.password, dbUser.salt, undefined)
+
+    return await dbUser.update(updatedUser)
   }
 
   @Mutation(returns => LoginResponse)
