@@ -1,6 +1,7 @@
 import { ObjectType, Field } from 'type-graphql'
 import { Table, Column, Model, HasMany, Default } from 'sequelize-typescript'
 import UserTask from './userTask.model'
+import * as Sequelize from 'sequelize'
 
 @Table({
   timestamps: true,
@@ -32,14 +33,15 @@ export default class Task extends Model<Task> {
 
   @Field()
   @Column
-  level: number
-
-  @Field()
-  @Column
-  points: number
+  category: string
 
   @Field()
   @Default(false)
   @Column
   canvas: boolean
+
+  @Field()
+  @Default('')
+  @Column(Sequelize.TEXT)
+  default: string
 }

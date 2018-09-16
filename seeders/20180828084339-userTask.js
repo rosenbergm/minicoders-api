@@ -3,7 +3,7 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.bulkInsert('UserTask', [{
-      progress: 'console.lo',
+      progress: '',
       taskId: 1,
       userId: 1,
       createdAt: new Date(),

@@ -14,14 +14,14 @@ export default class UserTaskResolver {
     // TODO: refactor
     // OPTIMIZE: Should not use map function, but directly return object
     const tasks = await this.database.models.Task.findAll({
-      attributes: [ 'id', 'title', 'problem', 'test', 'solution', 'level', 'points', 'canvas' ],
+      attributes: [ 'id', 'title', 'problem', 'test', 'solution', 'category', 'default', 'canvas' ],
       include: [ {
         model: this.database.models.UserTask,
         where: { userId: ctx.user.id },
         required: false
       } ],
       where: {
-        level: data.level
+        category: data.category
       }
     })
 
@@ -32,9 +32,9 @@ export default class UserTaskResolver {
         solution: task.solution,
         test: task.test,
         taskId: task.id,
-        level: task.level,
-        points: task.points,
+        category: task.category,
         canvas: task.canvas,
+        default: task.default,
         progress: task.userTasks.length > 0 ? task.userTasks[0].progress : undefined,
         finished: task.userTasks.length > 0 ? task.userTasks[0].finished : undefined,
         userTaskId: task.userTasks.length > 0 ? task.userTasks[0].id : undefined
@@ -52,12 +52,12 @@ export default class UserTaskResolver {
     @Arg('data') userTaskInput: UserTaskInput,
     @Ctx() ctx
 ): Promise<UserTask> {
-    const userTask = await this.database.models.UserTask.findById(userTaskInput.userTaskId)
+    let userTask = await this.database.models.UserTask.findById(userTaskInput.userTaskId)
 
     if (userTask) {
       userTask.update({ progress: userTaskInput.progress, finished: userTaskInput.finished })
     } else {
-      await this.database.models.UserTask.create({
+      userTask = await this.database.models.UserTask.create({
         progress: userTaskInput.progress,
         taskId: userTaskInput.taskId,
         userId: ctx.user.id,

@@ -3,7 +3,7 @@ import { InputType, Field, ObjectType } from 'type-graphql'
 @InputType()
 export class UserTasksFilterInput {
   @Field()
-  level: number
+  category: string
 }
 
 @InputType()
@@ -45,10 +45,10 @@ export class UserTaskResponse {
   test: string
 
   @Field()
-  level: number
+  category: string
 
-  @Field()
-  points: number
+  @Field({ nullable: true })
+  default: string
 
   @Field({ nullable: true })
   canvas: boolean
