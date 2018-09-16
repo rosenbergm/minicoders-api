@@ -8,6 +8,7 @@ module.exports = {
       userId: 1,
       createdAt: new Date(),
       updatedAt: new Date(),
+      isAdmin: true,
     }], {});
   },
 

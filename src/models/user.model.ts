@@ -21,4 +21,8 @@ export default class User extends Model<User> {
 
   @Column
   salt: string
+
+  @Field()
+  @Column
+  isAdmin: boolean
 }
