@@ -17,7 +17,7 @@ export default class Task extends Model<Task> {
   title: string
 
   @Field()
-  @Column
+  @Column(Sequelize.TEXT)
   problem: string
 
   @Field()
@@ -25,7 +25,12 @@ export default class Task extends Model<Task> {
   solution: string
 
   @Field()
+  @Default(false)
   @Column
+  asyncTest: boolean
+
+  @Field()
+  @Column(Sequelize.TEXT)
   test: string
 
   @HasMany(() => UserTask)

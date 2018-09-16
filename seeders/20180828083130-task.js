@@ -51,53 +51,91 @@ const tasks = [
     problem: 'Dopln podminku (if), aby se zmenila promenna coderDojo na true.',
     solution: '',
     default: `let den = 'utery'
-    let coderDojo = false
+let coderDojo = false
 
-    if () {
-      coderDojo = true
-    }`,
+if () {
+  coderDojo = true
+}`,
     test: 'coderDojo == true',
     category: 'basics'
   },
 
   {
     title: 'Pozice 1',
-    problem: 'Presun kulicku do praveho horniho rohu.',
+    problem: 'Presun kulicku do praveho horniho rohu. Pouzij promenne width (sirka platna), height (vyska platna) a ballRadius (prumer kulicky)',
     solution: 'let x = []',
-    default: 'let x = []',
-    test: 'x[0] === 10',
+    default: `posX = ballRadius
+posY = ballRadius
+
+drawBall()
+`,
+    test: 'posX == width - ballRadius && posY == ballRadius',
+    canvas: true,
     category: 'ball'
   },
   {
     title: 'Pozice 2',
     problem: 'Presun kulicku do praveho dolniho rohu.',
     solution: 'let x = []',
-    default: 'let x = []',
-    test: 'x[0] === 10',
+    default: `posX = ballRadius
+posY = ballRadius
+
+drawBall()
+`,
+    test: 'posX == width - ballRadius && posY == height - ballRadius',
+    canvas: true,
     category: 'ball'
   },
   {
     title: 'Pozice 3',
     problem: 'Presun kulicku do leveho dolniho rohu.',
     solution: 'let x = []',
-    default: 'let x = []',
-    test: 'x[0] === 10',
+    default: `posX = ballRadius
+posY = ballRadius
+
+drawBall()
+`,
+    test: 'posX == ballRadius && posY == height - ballRadius',
+    canvas: true,
     category: 'ball'
   },
   {
     title: 'Pozice 4',
     problem: 'Presun kulicku doprostred.',
     solution: 'let x = []',
-    default: 'let x = []',
-    test: 'x[0] === 10',
+    default: `posX = ballRadius
+posY = ballRadius
+
+drawBall()
+`,
+    test: 'posX == width / 2 - ballRadius && posY == height / 2 - ballRadius',
+    canvas: true,
     category: 'ball'
   },
   {
     title: 'Animace',
     problem: 'Pouzij podminky (if) a do metody draw napis kod, ktery bude pohybovat kulickou skrze vsechny rohy.',
     solution: 'let x = []',
-    default: 'let x = []',
-    test: 'x[0] === 10',
+    default: `posX = ballRadius
+posY = ballRadius
+
+function draw() {
+  drawBall()
+  window.requestAnimationFrame(draw)
+}
+
+window.requestAnimationFrame(draw)
+`,
+    asyncTest: true,
+    test: `
+const start = window.ballRadius+'x'+window.ballRadius+'y'
+const rightTopCorner = window.canvasWidth-window.ballRadius+'x'+(window.ballRadius+1)+'y'
+const rightBottomCorner = (window.canvasWidth-window.ballRadius-1)+'x'+(window.canvasHeight-window.ballRadius)+'y'
+const leftBottomCorner = window.ballRadius+'x'+(window.canvasHeight-window.ballRadius-1)+'y'
+
+return window.positionStack.includes(start) && window.positionStack.includes(rightTopCorner) && window.positionStack.includes(rightBottomCorner) && window.positionStack.includes(leftBottomCorner)
+    `,
+    canvas: true,
     category: 'ball'
   }
 ]

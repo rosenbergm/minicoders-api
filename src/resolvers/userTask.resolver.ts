@@ -14,7 +14,7 @@ export default class UserTaskResolver {
     // TODO: refactor
     // OPTIMIZE: Should not use map function, but directly return object
     const tasks = await this.database.models.Task.findAll({
-      attributes: [ 'id', 'title', 'problem', 'test', 'solution', 'category', 'default', 'canvas' ],
+      attributes: [ 'id', 'title', 'problem', 'test', 'solution', 'category', 'default', 'canvas', 'asyncTest' ],
       include: [ {
         model: this.database.models.UserTask,
         where: { userId: ctx.user.id },
@@ -34,6 +34,7 @@ export default class UserTaskResolver {
         taskId: task.id,
         category: task.category,
         canvas: task.canvas,
+        asyncTest: task.asyncTest,
         default: task.default,
         progress: task.userTasks.length > 0 ? task.userTasks[0].progress : undefined,
         finished: task.userTasks.length > 0 ? task.userTasks[0].finished : undefined,

@@ -44,6 +44,9 @@ export class UserTaskResponse {
   @Field()
   test: string
 
+  @Field({ nullable: true })
+  asyncTest: boolean
+
   @Field()
   category: string
 
