@@ -59,6 +59,67 @@ if () {
     test: 'coderDojo == true',
     category: 'basics'
   },
+  {
+    title: 'Podminka 2',
+    problem: 'Dopln podminku (if), aby se do konzole vypsalo "Ahoj", kdyz je promnenna x true(pravda).',
+    solution: '',
+    default: `let x = 
+
+if () {
+  console.log("Ahoj")
+}`,
+    test: 'window.consoleStack.includes("Hello world")',
+    category: 'basics'
+  },
+  {
+    title: 'Podminka 3',
+    problem: 'Dopln podminku (if), aby se do konzole vypsalo "Ahoj", kdyz je promnenna x A ZAROVEN y true(pravda)',
+    solution: '',
+    default: `let x = 
+let y = 
+
+if () {
+  console.log("Ahoj")
+}`,
+    test: 'window.consoleStack.includes("Hello world")',
+    category: 'basics'
+  },
+  {
+    title: 'Podminka 4 ',
+    problem: 'Dopln podminku (if), aby se do konzole vypsalo "Ahoj", kdyz je promnenna x NEBO y true(pravda)',
+    solution: '',
+    default: `let x = 
+let y = 
+
+if () {
+  console.log("Ahoj")
+}`,
+    test: 'window.consoleStack.includes("Hello world")',
+    category: 'basics'
+  },
+  {
+    title: 'Podminka 5 ',
+    problem: 'Dopln podminku (if), aby se do konzole vypsalo "Vitejte", kdyz je promnenna zvonek true(pravda). Kdyz ne, tak vypiste do konzole "Nashledanou"',
+    solution: '',
+    default: `let zvonek = 
+
+if () {
+  console.log("Vitejte")
+}`,
+    test: 'window.consoleStack.includes("Vitejte")',
+    category: 'basics'
+  },
+
+
+
+
+
+
+
+
+
+
+
 
   {
     title: 'Pozice 1',
