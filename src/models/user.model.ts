@@ -19,6 +19,10 @@ export default class User extends Model<User> {
   @Column
   password: string
 
+  @Field()
+  @Column
+  isAdmin: boolean
+
   @Column
   salt: string
 }

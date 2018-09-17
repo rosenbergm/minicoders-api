@@ -10,7 +10,8 @@ module.exports = {
       password: passwordHash,
       salt: salt,
       createdAt: new Date(),
-      updatedAt: new Date()
+      updatedAt: new Date(),
+      isAdmin: true,
     }], {})
   },
 
